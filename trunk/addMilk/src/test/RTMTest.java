@@ -25,7 +25,6 @@ import static org.junit.Assert.fail;
 import java.util.HashMap;
 import java.util.Vector;
 
-import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -48,14 +47,24 @@ public class RTMTest {
 
 	@Before
 	public void setUp() throws Exception {
-		rtm = new RTM("", "", "");
-		timeline = "";
-		contactID = "";
+		rtm = new RTM("API KEY", "SHARED SECRET", "TOKEN");
+		timeline = "TIMELINE";
+		contactID = "USER ID";
 	}
-
-	@After
-	public void tearDown() throws Exception {
-	}
+	
+	/**
+	 * This test exists only to print out an authentication URL to allow further testing.
+	 * Because it performs no actual tests, it has been commented.  
+	 */
+//	@Test
+//	public void testGenAuthURL(){
+//		try {
+//			System.out.println(rtm.genAuthURL(rtm.getFrob(), "delete"));
+//		} catch (MilkException e) {
+//			fail("exception");
+//			return;
+//		}
+//	}
 
 	@Test
 	public void testAddContact() {
