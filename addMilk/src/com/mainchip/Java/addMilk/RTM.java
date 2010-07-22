@@ -1,11 +1,22 @@
 /*
  * RTM.java
+ * Copyright (C) 2010  Dustin Stroup
+
+ * 
+ * This file is part of Java.addMilk.
  *
- * Version:
- *     $Id$
+ * Java.addMilk is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
  *
- * Revisions:
- *     $Log$
+ * Java.addMilk is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with Java.addMilk.  If not, see <http://www.gnu.org/licenses/>.
  */
 
 package com.mainchip.Java.addMilk;
@@ -46,31 +57,31 @@ public class RTM {
 	public static final String HASHING_ERROR = 		"Error parsing signature.";
 	public static final String NO_TOKEN =			"No token set";
 
-	
+
 	private static final String API_KEY = 			"api_key=";
 	private static final String API_SIG = 			"&api_sig=";
 	private static final String AUTH_TOKEN =		"&auth_token=";
 	private static final String TIMELINE = 			"&timeline=";
 	private static final String FROB = 				"&frob=";
-	
-	
-	
+
+
+
 	private static final String CHECK_TOKEN =		"&method=rtm.auth.checkToken";
 	private static final String GET_FROB = 			"&method=rtm.auth.getFrob";
 	private static final String GET_TOKEN = 		"&method=rtm.auth.getToken";
-	
+
 	private static final String CREATE_TIMELINE =	"&method=rtm.timelines.create";
-	
+
 	private static final String ADD_CONTACT = 		"&method=rtm.contacts.add";
 	private static final String DELETE_CONTACT =	"&method=rtm.contacts.delete";
 	private static final String GETLIST_CONTACTS =	"&method=rtm.contacts.getList";
-	
+
 	private static final String ADD_GROUP =			"&method=rtm.groups.add";
 	private static final String ADD_CONTACT_GROUP = "&method=rtm.groups.addContact";
 	private static final String DELETE_GROUP =		"&method=rtm.groups.delete";
 	private static final String GETLIST_GROUPS =	"&method=rtm.groups.getList";
 	private static final String REMOVE_CONTACT_GROUP ="&method=rtm.groups.removeContact";
-	
+
 	private static final String ADD_TASKLIST = 		"&method=rtm.lists.add";
 	private static final String ARCHIVE_TASKLIST =	"&method=rtm.lists.archive";
 	private static final String DELETE_TASKLIST = 	"&method=rtm.lists.delete";
@@ -78,18 +89,18 @@ public class RTM {
 	private static final String SETDEFAULT_TASKLIST="&method=rtm.lists.setDefaultList";
 	private static final String SETNAME_TASKLIST = 	"&method=rtm.lists.setName";
 	private static final String UNARCHIVE_TASKLIST ="&method=rtm.lists.unarchive";
-	
+
 	private static final String GET_LOCATIONS = 	"&method=rtm.locations.getList";
 	private static final String GET_SETTINGS =		"&method=rtm.settings.getList";
 	private static final String UNDO =				"&method=rtm.transactions.undo";
 	private static final String GETLIST_TIMEZONES= 	"&method=rtm.timezones.getList";
-	
+
 	private static final String CONVERT_TIME = 		"&method=rtm.time.convert";
 	private static final String PARSE_TIME = 		"&method=rtm.time.parse";
-	
+
 	private static final String TEST_ECHO = 		"&method=rtm.test.echo";
 	private static final String TEST_LOGIN = 		"&method=rtm.test.login";
-	
+
 	private static final String ADD_TASK = 			"&method=rtm.tasks.add";
 	private static final String COMPLETE_TASK = 	"&method=rtm.tasks.complete";
 	private static final String ADD_TAGS = 			"&method=rtm.tasks.addTags";
@@ -108,27 +119,27 @@ public class RTM {
 	private static final String SET_TAGS = 			"&method=rtm.tasks.setTags";
 	private static final String SET_URL = 			"&method=rtm.tasks.setURL";
 	private static final String UNCOMPLETE = 		"&method=rtm.tasks.uncomplete";
-	
+
 	private static final String ADD_NOTE = 			"&method=rtm.tasks.notes.add";
 	private static final String DELETE_NOTE = 		"&method=rtm.tasks.notes.delete";
 	private static final String EDIT_NOTE = 		"&method=rtm.tasks.notes.edit";
-	
-	
+
+
 	private String _apiKey = null;
 	private String _secret = null;
 	private String _token = "";
 	private MilkError _error = null;
-	
+
 	public enum Freq{
 		DAILY, WEEKLY, MONTHLY, YEARLY
 	}
-	
+
 	/**
 	 * The default constructor.
 	 */
 	public RTM(){
 	}
-	
+
 	/**
 	 * @param apiKey		A valid RTM API key.
 	 * @param secret		A valid RTM API shared secret.
@@ -137,7 +148,7 @@ public class RTM {
 		_apiKey = apiKey;
 		_secret = secret;
 	}
-	
+
 	/**
 	 * @param apiKey		A valid RTM API key.
 	 * @param secret		A valid RTM API shared secret.
@@ -148,7 +159,7 @@ public class RTM {
 		_secret = secret;
 		_token = token;
 	}
-	
+
 	/**
 	 * Register your key and shared secret with this object.  Required only when
 	 * using the default constructor.
@@ -160,7 +171,7 @@ public class RTM {
 		_apiKey = apiKey;
 		_secret = secret;
 	}
-	
+
 	/**
 	 * Register your key, shared secret and token with this object.
 	 * 
@@ -173,7 +184,7 @@ public class RTM {
 		_secret = secret;
 		_token = token;
 	}
-	
+
 	/**
 	 * Set the token to be used for all method calls.
 	 * 
@@ -182,8 +193,8 @@ public class RTM {
 	public void setToken(String token){
 		_token = token;
 	}
-	
-	
+
+
 	/**
 	 * Returns the token currently in use.
 	 * 
@@ -192,7 +203,7 @@ public class RTM {
 	public String getToken(){
 		return _token;
 	}
-	
+
 	/**
 	 * Returns the API key used in communicating with RTM.
 	 * 
@@ -201,7 +212,7 @@ public class RTM {
 	public String getKey(){
 		return _apiKey;
 	}
-	
+
 	/**
 	 * Returns the shared secret used in communicating with RTM.
 	 * 
@@ -210,7 +221,7 @@ public class RTM {
 	public String getSecret(){
 		return _secret;
 	}
-	
+
 	/**
 	 * Returns and clears the latest error, if any.
 	 * 
@@ -223,7 +234,7 @@ public class RTM {
 		_error = null;
 		return retVal;
 	}
-	
+
 	/**
 	 * Checks if an error has been reported by the RTM API.
 	 * 
@@ -234,7 +245,7 @@ public class RTM {
 	public boolean errorSet(){
 		return (_error != null);
 	}
-	
+
 	/**
 	 * An internal method to determine if the API key and shared secret have 
 	 * been set by the user.
@@ -247,7 +258,7 @@ public class RTM {
 			throw new MilkException(NO_KEYS);
 		}
 	}
-	
+
 	/**
 	 * An internal method to generate the final URL used to make API calls.
 	 * 
@@ -259,7 +270,7 @@ public class RTM {
 		if(_token == null || _token.isEmpty()){
 			throw new MilkException(NO_TOKEN);
 		}
-		
+
 		methodCall = API_KEY + _apiKey + AUTH_TOKEN + _token + methodCall;
 		try {
 			return new URL(API_URL + "?" + methodCall.replace(' ', '+') +
@@ -268,7 +279,7 @@ public class RTM {
 			throw new MilkException(API_ERROR, e);
 		}
 	}
-	
+
 	/**
 	 * An internal method to generate a SAXParser used to parse API responses.
 	 * 
@@ -283,7 +294,7 @@ public class RTM {
 			throw new MilkException(API_ERROR, e);
 		}
 	}
-	
+
 	/**
 	 * An internal method for making rtm.test.echo calls to the API.
 	 * 
@@ -296,15 +307,15 @@ public class RTM {
 		SAXParser parser;
 		EchoHandler handler = new EchoHandler();
 
-        checkKeys();
-		
+		checkKeys();
+
 		try{
 			url = genURL(methodCall);	
-            parser = genParser();
+			parser = genParser();
 
-            parser.parse(url.openStream(), handler);
-            
-            _error = handler.getError(); 
+			parser.parse(url.openStream(), handler);
+
+			_error = handler.getError(); 
 		}catch (IOException e) {
 			throw new MilkException(API_ERROR, e);
 		} catch (SAXException e) {
@@ -313,7 +324,7 @@ public class RTM {
 
 		return handler;
 	}
-	
+
 	/**
 	 * An internal method for making rtm.list and rtm.task calls to the API.
 	 * 
@@ -326,15 +337,15 @@ public class RTM {
 		SAXParser parser;
 		ListHandler handler = new ListHandler();
 
-        checkKeys();
-		
+		checkKeys();
+
 		try{
 			url = genURL(methodCall);	
-            parser = genParser();
+			parser = genParser();
 
-            parser.parse(url.openStream(), handler);
-            
-            _error = handler.getError(); 
+			parser.parse(url.openStream(), handler);
+
+			_error = handler.getError(); 
 		}catch (IOException e) {
 			throw new MilkException(API_ERROR, e);
 		} catch (SAXException e) {
@@ -356,15 +367,15 @@ public class RTM {
 		SAXParser parser;
 		GroupHandler handler = new GroupHandler();
 
-        checkKeys();
-		
+		checkKeys();
+
 		try{
 			url = genURL(methodCall);	
-            parser = genParser();
+			parser = genParser();
 
-            parser.parse(url.openStream(), handler);
-            
-            _error = handler.getError(); 
+			parser.parse(url.openStream(), handler);
+
+			_error = handler.getError(); 
 		}catch (IOException e) {
 			throw new MilkException(API_ERROR, e);
 		} catch (SAXException e) {
@@ -386,15 +397,15 @@ public class RTM {
 		SAXParser parser;
 		TokenHandler handler = new TokenHandler();
 
-        checkKeys();
-		
+		checkKeys();
+
 		try{
 			url = genURL(methodCall);	
-            parser = genParser();
+			parser = genParser();
 
-            parser.parse(url.openStream(), handler);
-            
-            _error = handler.getError(); 
+			parser.parse(url.openStream(), handler);
+
+			_error = handler.getError(); 
 		}catch (IOException e) {
 			throw new MilkException(API_ERROR, e);
 		} catch (SAXException e) {
@@ -416,15 +427,15 @@ public class RTM {
 		SAXParser parser;
 		UserHandler handler = new UserHandler();
 
-        checkKeys();
-		
+		checkKeys();
+
 		try{
 			url = genURL(methodCall);	
-            parser = genParser();
+			parser = genParser();
 
-            parser.parse(url.openStream(), handler);
-            
-            _error = handler.getError(); 
+			parser.parse(url.openStream(), handler);
+
+			_error = handler.getError(); 
 		}catch (IOException e) {
 			throw new MilkException(API_ERROR, e);
 		} catch (SAXException e) {
@@ -446,16 +457,16 @@ public class RTM {
 		SAXParser parser;
 		TransactionHandler handler = new TransactionHandler();
 
-        checkKeys();
-		
-		
+		checkKeys();
+
+
 		try{
 			url = genURL(methodCall);	
-            parser = genParser();
+			parser = genParser();
 
-            parser.parse(url.openStream(), handler);
-            
-            _error = handler.getError(); 
+			parser.parse(url.openStream(), handler);
+
+			_error = handler.getError(); 
 		}catch (IOException e) {
 			throw new MilkException(API_ERROR, e);
 		} catch (SAXException e) {
@@ -477,16 +488,16 @@ public class RTM {
 		SAXParser parser;
 		NoteHandler handler = new NoteHandler();
 
-        checkKeys();
-		
-		
+		checkKeys();
+
+
 		try{
 			url = genURL(methodCall);	
-            parser = genParser();
+			parser = genParser();
 
-            parser.parse(url.openStream(), handler);
-            
-            _error = handler.getError(); 
+			parser.parse(url.openStream(), handler);
+
+			_error = handler.getError(); 
 		}catch (IOException e) {
 			throw new MilkException(API_ERROR, e);
 		} catch (SAXException e) {
@@ -508,16 +519,16 @@ public class RTM {
 		SAXParser parser;
 		TimeHandler handler = new TimeHandler();
 
-        checkKeys();
-		
-		
+		checkKeys();
+
+
 		try{
 			url = genURL(methodCall);	
-            parser = genParser();
+			parser = genParser();
 
-            parser.parse(url.openStream(), handler);
-            
-            _error = handler.getError(); 
+			parser.parse(url.openStream(), handler);
+
+			_error = handler.getError(); 
 		}catch (IOException e) {
 			throw new MilkException(API_ERROR, e);
 		} catch (SAXException e) {
@@ -539,15 +550,15 @@ public class RTM {
 		SAXParser parser;
 		ResponseHandler handler = new ResponseHandler();
 
-        checkKeys();
-        
+		checkKeys();
+
 		try{	
 			url = genURL(methodCall);
-            parser = genParser();
+			parser = genParser();
 
-            parser.parse(url.openStream(), handler);
-            
-            _error = handler.getError();
+			parser.parse(url.openStream(), handler);
+
+			_error = handler.getError();
 		}catch (IOException e) {
 			throw new MilkException(API_ERROR, e);
 		} catch (SAXException e) {
@@ -556,7 +567,7 @@ public class RTM {
 
 		return handler;
 	}
-	
+
 	//----------------------Signature Parsing---------------------------------//
 	/**
 	 * A method for generating the appropiate hash code used to sign API calls.
@@ -568,34 +579,34 @@ public class RTM {
 	public String parseSig(String methodCall) throws MilkException{
 		String retVal;
 		String sig = _secret + parseMethod(methodCall);
-		
+
 		// Variables needed for MD5 hashing
 		MessageDigest m;
 		BigInteger bigInt;
 		byte digest[];
-		
+
 		// Create the digest used to hash the api_sig
 		try {
 			m = MessageDigest.getInstance("MD5");
 		} catch (NoSuchAlgorithmException e) {
 			throw new MilkException(HASHING_ERROR, e);
 		}
-		
+
 		// Hash the api_sig and convert the resulting byte array to a string
 		m.reset();
 		m.update(sig.getBytes());
 		digest = m.digest();
 		bigInt = new BigInteger(1, digest);
 		retVal = bigInt.toString(16);
-		
+
 		// Zero pad the hash to get the full 32 chars
 		while(retVal.length() < 32){
 			retVal = "0" + retVal;
 		}
-		
+
 		return (API_SIG + retVal);
 	}
-	
+
 	/**
 	 * A method to prepare the parameters of a method call for signing.
 	 * 
@@ -607,18 +618,18 @@ public class RTM {
 		String retVal = "";
 		String sig[] = methodCall.split("&");		
 		Arrays.sort(sig);
-		
+
 		for(int i = 0; i < sig.length; i++){
 			if(!sig[i].isEmpty()){
 				retVal += sig[i].replace("=", "");
 			}
 		}
-		
+
 		return retVal;
 	}
-	
+
 	//-----------------------------Auth---------------------------------------//
-	
+
 	/**
 	 * Returns the credentials attached to an authentication token.  (rtm.auth.checkToken)
 	 *
@@ -628,7 +639,7 @@ public class RTM {
 	public Token checkToken() throws MilkException{
 		return callToken(CHECK_TOKEN).getToken();
 	}
-	
+
 	/**
 	 * Generates a frob used during authentication.  (rtm.auth.getFrob)
 	 *
@@ -638,7 +649,7 @@ public class RTM {
 	public String getFrob() throws MilkException{
 		return callAPI(GET_FROB).getFrob();
 	}
-	
+
 	/**
 	 * Returns the auth token associated with the given frob.  (rtm.auth.getToken)
 	 *
@@ -650,7 +661,7 @@ public class RTM {
 	public Token getToken(String frob) throws MilkException{
 		return callToken(GET_TOKEN + FROB + frob).getToken();	
 	}
-	
+
 	//---------------------------Contacts-------------------------------------//
 	/**
 	 * Adds a new contact.  (rtm.contacts.add)
@@ -664,7 +675,7 @@ public class RTM {
 	public User addContact(String timeline, String contact) throws MilkException{
 		return callUser(ADD_CONTACT + TIMELINE + timeline + "&contact=" + contact).getUser();
 	}
-	
+
 	/**
 	 * Deletes a contact.  (rtm.contacts.delete)
 	 *
@@ -678,7 +689,7 @@ public class RTM {
 			String contactID) throws MilkException{
 		return callTrans(DELETE_CONTACT + TIMELINE + timeline + "&contact_id=" + contactID).getTransaction();
 	}
-	
+
 	/**
 	 * Retrieves a list of contacts.  (rtm.contacts.getList)
 	 *
@@ -688,7 +699,7 @@ public class RTM {
 	public Vector<User> getListOfContacts() throws MilkException{
 		return callUser(GETLIST_CONTACTS).getUsers();
 	}
-	
+
 	//----------------------------Groups--------------------------------------//
 	/**
 	 * Creates a new group.  (rtm.groups.add)
@@ -702,7 +713,7 @@ public class RTM {
 	public Group addGroup(String timeline, String group) throws MilkException{
 		return callGroup(ADD_GROUP + TIMELINE + timeline + "&group=" + group).getGroup();
 	}
-	
+
 	/**
 	 * Adds a contact to a group.  (rtm.groups.addContact)
 	 *
@@ -716,7 +727,7 @@ public class RTM {
 	public Transaction addContactGroup(String timeline, String groupID, String contactID) throws MilkException{
 		return callTrans(ADD_CONTACT_GROUP + TIMELINE + timeline + "&group_id=" + groupID + "&contact_id=" + contactID).getTransaction();
 	}
-	
+
 	/**
 	 * Deletes a group.  (rtm.groups.delete)
 	 *
@@ -729,7 +740,7 @@ public class RTM {
 	public Transaction deleteGroup(String timeline, String groupID) throws MilkException{
 		return callTrans(DELETE_GROUP + TIMELINE + timeline + "&group_id=" + groupID).getTransaction();
 	}
-	
+
 	/**
 	 * Retrieves a list of groups.  (rtm.groups.getList)
 	 *
@@ -739,7 +750,7 @@ public class RTM {
 	public Vector<Group> getListOfGroups() throws MilkException{
 		return callGroup(GETLIST_GROUPS).getGroups();
 	}
-	
+
 	/**
 	 * Removes a contact from a group. (rtm.groups.removeContact)
 	 *
@@ -753,9 +764,9 @@ public class RTM {
 	public Transaction removeContactGroup(String timeline, String groupID, String contactID) throws MilkException{
 		return callTrans(REMOVE_CONTACT_GROUP + TIMELINE + timeline + "&group_id=" + groupID + "&contact_id=" + contactID).getTransaction();
 	}
-	
+
 	//-----------------------------List---------------------------------------//
-	
+
 	/**
 	 * Creates a new list. (rtm.lists.add)
 	 *
@@ -768,14 +779,14 @@ public class RTM {
 	 */
 	public TaskList addTaskList(String timeline, String name, String filter) throws MilkException{
 		String methodCall = ADD_TASKLIST + TIMELINE + timeline + "&name=" + name;
-		
+
 		if(!filter.isEmpty()){
 			methodCall += "&filter=" + filter;
 		}
-		
+
 		return callList(methodCall).getTaskList();
 	}
-	
+
 	/**
 	 * Archives a task list. (rtm.lists.archive)
 	 *
@@ -788,7 +799,7 @@ public class RTM {
 	public TaskList archiveTaskList(String timeline, String listID) throws MilkException{
 		return callList(ARCHIVE_TASKLIST + TIMELINE + timeline + "&list_id=" + listID).getTaskList();
 	}
-	
+
 	/**
 	 * Deletes a task list. (rtm.lists.delete)
 	 * NOTE: This does not remove the list from the server, it only marks the list as deleted.
@@ -803,7 +814,7 @@ public class RTM {
 	public TaskList deleteTaskList(String timeline, String listID) throws MilkException{
 		return callList(DELETE_TASKLIST + TIMELINE + timeline + "&list_id=" + listID).getTaskList();
 	}
-	
+
 	/**
 	 * Retrives a list of lists. (rtm.lists.getList)
 	 *
@@ -813,7 +824,7 @@ public class RTM {
 	public Vector<TaskList> getListOfTaskLists() throws MilkException{
 		return callList(GETLIST_TASKLIST).getTaskLists();
 	}
-	
+
 	/**
 	 * Sets the default list. (rtm.lists.setDefaultList)
 	 *
@@ -826,7 +837,7 @@ public class RTM {
 	public Transaction setDefaultTaskList(String timeline, String listID) throws MilkException{
 		return callTrans(SETDEFAULT_TASKLIST + TIMELINE + timeline + "&list_id=" + listID).getTransaction();
 	}
-	
+
 	/**
 	 * Renames a list. (rtm.lists.setName)
 	 *
@@ -840,7 +851,7 @@ public class RTM {
 	public TaskList setNameOfTaskList(String timeline, String listID, String name) throws MilkException{
 		return callList(SETNAME_TASKLIST + TIMELINE + timeline + "&list_id=" + listID + "&name=" + name).getTaskList();
 	}
-	
+
 	/**
 	 *	Unarchives a list. (rtm.lists.unarchive)
 	 *
@@ -853,9 +864,9 @@ public class RTM {
 	public TaskList unarchiveTaskList(String timeline, String listID) throws MilkException{
 		return callList(UNARCHIVE_TASKLIST + TIMELINE + timeline + "&list_id=" + listID).getTaskList();
 	}
-	
+
 	//---------------------------Locations------------------------------------//
-	
+
 	/**
 	 * Retrieves a list of locations. (rtm.locations.getList)
 	 *
@@ -865,7 +876,7 @@ public class RTM {
 	public Vector<Location> getLocations() throws MilkException{
 		return callAPI(GET_LOCATIONS).getLocations();
 	}
-	
+
 	//---------------------------Settings-------------------------------------//
 	/**
 	 *	Retrieve a list of user settings. (rtm.settings.getList)
@@ -876,7 +887,7 @@ public class RTM {
 	public Settings getSettings() throws MilkException{
 		return callAPI(GET_SETTINGS).getSettings();
 	}
-	
+
 	//-----------------------------Task---------------------------------------//
 	/**
 	 * Adds a task to the specified list. (rtm.tasks.add)
@@ -891,14 +902,14 @@ public class RTM {
 	 */
 	public TaskList addTask(String timeline, String listID, String name, String parse) throws MilkException{
 		String methodCall = ADD_TASK + TIMELINE + timeline + "&list_id=" + listID + "&name=" + name;
-		
+
 		if(!(parse.isEmpty())){
 			methodCall += "&parse=" + parse;
 		}
-		
+
 		return callList(methodCall).getTaskList();
 	}
-	
+
 	/**
 	 *	Add tags to a task. (rtm.tasks.addTags)
 	 * 
@@ -914,7 +925,7 @@ public class RTM {
 	public TaskList addTags(String timeline, String listID, String seriesID, String taskID, String tags) throws MilkException{
 		return callList(ADD_TAGS + TIMELINE + timeline + "&list_id=" + listID + "&taskseries_id=" + seriesID + "&task_id=" + taskID + "&tags=" + tags).getTaskList();
 	}
-	
+
 	/**
 	 * Marks a task as completed. (rtm.tasks.complete)
 	 *
@@ -929,7 +940,7 @@ public class RTM {
 	public TaskList completeTask(String timeline, String listID, String seriesID, String taskID) throws MilkException{
 		return callList(COMPLETE_TASK + TIMELINE + timeline + "&list_id=" + listID + "&task_id=" + taskID + "&taskseries_id=" + seriesID).getTaskList();
 	}
-	
+
 	/**
 	 * Marks a task as deleted. (rtm.tasks.delete)
 	 * 
@@ -944,7 +955,7 @@ public class RTM {
 	public TaskList deleteTask(String timeline, String listID, String seriesID, String taskID) throws MilkException{
 		return callList(DELETE_TASK + TIMELINE + timeline + "&list_id=" + listID + "&task_id=" + taskID + "&taskseries_id=" + seriesID).getTaskList();
 	}
-	
+
 	/**
 	 * Retrieve a list of tasks. (rtm.tasks.getList)
 	 *
@@ -957,22 +968,22 @@ public class RTM {
 	 */
 	public Vector<TaskList> getTaskList(String listID, String filter, String lastSync) throws MilkException{
 		String methodCall = GET_TASKLIST;
-		
+
 		if(!(listID.isEmpty())){
 			methodCall += "&list_id=" + listID;
 		}
-		
+
 		if(!(filter.isEmpty())){
 			methodCall += "&filter=" + filter;
 		}
-		
+
 		if(!(lastSync.isEmpty())){
 			methodCall += "&last_sync=" + lastSync;
 		}
-		
+
 		return callList(methodCall).getTaskLists();
 	}
-	
+
 	/**
 	 * Move the priority of a task up or down. (rtm.tasks.movePriority)
 	 * 
@@ -989,7 +1000,7 @@ public class RTM {
 		return callList(MOVE_PRIORITY + TIMELINE + timeline + "&list_id=" + listID + 
 				"&taskseries_id=" + seriesID + "&task_id=" + taskID + "&direction=" + direction).getTaskList();
 	}
-	
+
 	/**
 	 * Move a task between lists. (rtm.tasks.moveTo)
 	 * 
@@ -1004,9 +1015,9 @@ public class RTM {
 	 */
 	public TaskList moveTaskTo(String timeline, String seriesID, String taskID, String fromListID, String toListID) throws MilkException{
 		return callList(MOVE_TASK_TO + TIMELINE + timeline + "&task_id=" + taskID + 
-				 "&taskseries_id=" + seriesID + "&from_list_id=" + fromListID + "&to_list_id=" + toListID).getTaskList();
+				"&taskseries_id=" + seriesID + "&from_list_id=" + fromListID + "&to_list_id=" + toListID).getTaskList();
 	}
-	
+
 	/**
 	 * Advances a tasks due date by one day.  If the task is overdue or has no due date, the due date is set to today. (rtm.tasks.removeTags)
 	 * 
@@ -1021,7 +1032,7 @@ public class RTM {
 	public TaskList postpone(String timeline, String listID, String seriesID, String taskID) throws MilkException{
 		return callList(POSTPONE + TIMELINE + timeline + "&list_id=" + listID + "&taskseries_id=" + seriesID + "&task_id=" + taskID).getTaskList();
 	}
-	
+
 	/**
 	 * Removes tags from a task. (rtm.tasks.removeTags)
 	 * 
@@ -1038,7 +1049,7 @@ public class RTM {
 		return callList(REMOVE_TAGS + TIMELINE + timeline + "&list_id=" + listID + "&taskseries_id=" + seriesID + "&task_id=" + taskID +
 				"&tags=" + tags).getTaskList();
 	}
-	
+
 	/**
 	 * Sets the due date for a task. (rtm.tasks.setDueDate)
 	 * 
@@ -1056,22 +1067,22 @@ public class RTM {
 	 */
 	public TaskList setDueDate(String timeline, String listID, String seriesID, String taskID, String due, String hasDueTime, String parse) throws MilkException{
 		String methodCall = SET_DUE_DATE + TIMELINE + timeline + "&list_id=" + listID + "&taskseries_id=" + seriesID + "&task_id=" + taskID;
-		
+
 		if(!(due.isEmpty())){
 			methodCall += "&due=" + due;
 		}
-		
+
 		if(!(hasDueTime.isEmpty())){
 			methodCall += "&has_due_time=" + hasDueTime;
 		}
-		
+
 		if(!(parse.isEmpty())){
 			methodCall += "&parse=" + parse;
 		}
-		
+
 		return callList(methodCall).getTaskList();
 	}
-	
+
 	/**
 	 * Sets a time estimate for the completion of a task. (rtm.tasks.setEstimate)
 	 * 
@@ -1086,14 +1097,14 @@ public class RTM {
 	 */
 	public TaskList setEstimate(String timeline, String listID, String seriesID, String taskID, String estimate) throws MilkException{
 		String methodCall = SET_ESTIMATE + TIMELINE + timeline + "&list_id=" + listID + "&taskseries_id=" + seriesID + "&task_id=" + taskID;
-		
+
 		if(!(estimate.isEmpty())){
 			methodCall += "&estimate=" + estimate;
 		}
-		
+
 		return callList(methodCall).getTaskList();
 	}
-	
+
 	/**
 	 * Sets a location for a task. (rtm.tasks.setLocation)
 	 * 
@@ -1108,14 +1119,14 @@ public class RTM {
 	 */
 	public TaskList setLocation(String timeline, String listID, String seriesID, String taskID, String locationID) throws MilkException{
 		String methodCall = SET_LOCATION + TIMELINE + timeline + "&list_id=" + listID + "&taskseries_id=" + seriesID + "&task_id=" + taskID;
-		
+
 		if(!(locationID.isEmpty())){
 			methodCall += "&location_id=" + locationID;
 		}
-		
+
 		return callList(methodCall).getTaskList();
 	}
-	
+
 	/**
 	 * Renames a task. (rtm.tasks.setName)
 	 * 
@@ -1131,7 +1142,7 @@ public class RTM {
 	public TaskList setName(String timeline, String listID, String seriesID, String taskID, String name) throws MilkException{
 		return callList(SET_NAME + TIMELINE + timeline + "&list_id=" + listID + "&taskseries_id=" + seriesID + "&task_id=" + taskID + "&name=" + name).getTaskList();
 	}
-	
+
 	/**
 	 * Sets the priority of the task (1, 2, or 3). (rtm.tasks.setPriority)
 	 * 
@@ -1146,14 +1157,14 @@ public class RTM {
 	 */
 	public TaskList setPriority(String timeline, String listID, String seriesID, String taskID, String priority) throws MilkException{
 		String methodCall = SET_PRIORITY + TIMELINE + timeline + "&list_id=" + listID + "&taskseries_id=" + seriesID + "&task_id=" + taskID;
-		
+
 		if(!(priority.isEmpty())){
 			methodCall += "&priority=" + priority;
 		}
-		
+
 		return callList(methodCall).getTaskList();
 	}
-	
+
 	/**
 	 * Set the recurrence pattern for a task. (rtm.tasks.setRecurrence)
 	 * 
@@ -1168,14 +1179,14 @@ public class RTM {
 	 */
 	public TaskList setRecurrence(String timeline, String listID, String seriesID, String taskID, String repeat) throws MilkException{
 		String methodCall = SET_RECURRENCE + TIMELINE + timeline + "&list_id=" + listID + "&taskseries_id=" + seriesID + "&task_id=" + taskID;
-		
+
 		if(!(repeat.isEmpty())){
 			methodCall += "&repeat=" + repeat;
 		}
-		
+
 		return callList(methodCall).getTaskList();
 	}
-	
+
 	/**
 	 * Sets the tags of a task.  (rtm.tasks.setTags)
 	 * 
@@ -1191,7 +1202,7 @@ public class RTM {
 	public TaskList setTags(String timeline, String listID, String seriesID, String taskID, String tags) throws MilkException{
 		return callList(SET_TAGS + TIMELINE + timeline + "&list_id=" + listID + "&taskseries_id=" + seriesID + "&task_id=" + taskID + "&tags=" + tags).getTaskList();
 	}
-	
+
 	/**
 	 * Sets the URL for a task. (rtm.tasks.setURL)
 	 * 
@@ -1206,14 +1217,14 @@ public class RTM {
 	 */
 	public TaskList setURL(String timeline, String listID, String seriesID, String taskID, String url) throws MilkException{
 		String methodCall = SET_URL + TIMELINE + timeline + "&list_id=" + listID + "&taskseries_id=" + seriesID + "&task_id=" + taskID;
-		
+
 		if(!(url.isEmpty())){
 			methodCall += "&url=" + url;
 		}
-		
+
 		return callList(methodCall).getTaskList();
 	}
-	
+
 	/**
 	 * Marks a task as incomplete. (rtm.tasks.uncomplete)
 	 * 
@@ -1228,7 +1239,7 @@ public class RTM {
 	public TaskList uncomplete(String timeline, String listID, String seriesID, String taskID) throws MilkException{
 		return callList(UNCOMPLETE + TIMELINE + timeline + "&list_id=" + listID + "&taskseries_id=" + seriesID + "&task_id=" + taskID).getTaskList();
 	}
-	
+
 	//-----------------------------Note---------------------------------------//
 	/**
 	 * Adds a new note to a task. (rtm.tasks.notes.add)
@@ -1247,7 +1258,7 @@ public class RTM {
 		return callNote(ADD_NOTE + TIMELINE + timeline + "&list_id=" + listID + "&taskseries_id=" + seriesID + "&task_id=" + taskID +
 				"&note_title=" + noteTitle + "&note_text=" + noteText).getNote();
 	}
-	
+
 	/**
 	 * Deletes a note. (rtm.tasks.notes.delete)
 	 * 
@@ -1260,7 +1271,7 @@ public class RTM {
 	public boolean deleteNote(String timeline, String noteID) throws MilkException{
 		return (callAPI(DELETE_NOTE + TIMELINE + timeline + "&note_id=" + noteID).getError() == null);
 	}
-	
+
 	/**
 	 * Modifies a note. (rtm.tasks.notes.edit)
 	 * 
@@ -1275,7 +1286,7 @@ public class RTM {
 	public Note editNote(String timeline, String noteID, String noteTitle, String noteText) throws MilkException{
 		return callNote(EDIT_NOTE + TIMELINE + timeline + "&note_id=" + noteID + "&note_title=" + noteTitle + "&note_text=" + noteText).getNote();
 	}
-	
+
 	//-----------------------------Test---------------------------------------//
 	/**
 	 * A testing method which echos all parameters back in the response. (rtm.test.echo)
@@ -1288,12 +1299,12 @@ public class RTM {
 	public HashMap<String, String> echo(HashMap<String, String> string) throws MilkException{
 		Iterator<Entry<String, String>> iter = string.entrySet().iterator();
 		String methodCall = "";
-		
+
 		while(iter.hasNext()){
 			Map.Entry<String, String> pairs = (Map.Entry<String, String>)iter.next();
 			methodCall += "&" + pairs.getKey() + "=" + pairs.getValue();
 		}
-		
+
 		return callEcho(TEST_ECHO + methodCall).getParams();
 	}
 
@@ -1307,7 +1318,7 @@ public class RTM {
 	public User testLogin() throws MilkException{
 		return callUser(TEST_LOGIN).getUser();
 	}
-	
+
 	//-----------------------------Time---------------------------------------//
 	/**
 	 * Converts the time from one timezone to another.  (rtm.time.convert)
@@ -1321,18 +1332,18 @@ public class RTM {
 	 */
 	public Time convertTime(String toTimezone, String fromTimezone, String time) throws MilkException{
 		String methodCall = CONVERT_TIME + "&to_timezone=" + toTimezone;
-		
+
 		if(!(fromTimezone.isEmpty())){
 			methodCall += "&from_timezone=" + fromTimezone;
 		}
-		
+
 		if(!(time.isEmpty())){
 			methodCall += "&time=" + time;
 		}
-		
+
 		return callTime(methodCall).getTime();
 	}
-	
+
 	/**
 	 * Parses a string into the RTM time format. (rtm.time.parse)
 	 * 
@@ -1346,18 +1357,18 @@ public class RTM {
 	 */
 	public Time parseTime(String text, String timezone, String dateFormat) throws MilkException{
 		String methodCall = PARSE_TIME + "&text=" + text;
-		
+
 		if(!timezone.isEmpty()){
 			methodCall += "&timezone=" + timezone;
 		}
-		
+
 		if(!dateFormat.isEmpty()){
 			methodCall += "&dateformat=" + dateFormat;
 		}
-		
+
 		return callTime(methodCall).getTime();
 	}
-	
+
 	//---------------------------Timeline-------------------------------------//
 	/**
 	 * Creates a timeline to be used in making method calls. (rtm.timeline.create)
@@ -1368,7 +1379,7 @@ public class RTM {
 	public String createTimeline() throws MilkException{
 		return callAPI(CREATE_TIMELINE).getTimeline();
 	}
-	
+
 	//---------------------------Timezone-------------------------------------//
 	/**
 	 * Gets the list of all timezones in the format accepted by RTM. (rtm.timezones.getList)
@@ -1379,7 +1390,7 @@ public class RTM {
 	public Vector<Timezone> getListOfTimezones() throws MilkException{
 		return callAPI(GETLIST_TIMEZONES).getTimezones();
 	}
-	
+
 	//-------------------------Transaction------------------------------------//
 	/**
 	 * Undo the actions of a previous method call.  (rtm.transactions.undo)
