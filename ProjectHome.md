@@ -1,0 +1,1 @@
+A simple Java interface for Remember the Milk's web API.  This interface uses the standard SAX Parser to convert RTM XML responses into simple objects.
